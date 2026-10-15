@@ -389,7 +389,7 @@ export default {
       },
       contact: {
         phone: '(+61) 416-160-912',
-        email: 'derwentx@gmail.com'
+        email: 'dev.aleph.null@gmail.com'
       },
       about:
         'I am a polymath developer with a passion for social justice. I have an innate ability to quickly adapt to unfamiliar tech stacks and a strong drive for solving complex engineering problems on the cutting edge of computer science. I have made a point of exposing myself to as many different software engineering domains as possible. These domains range from quantum computing, machine learning, and internet of things, to augmented reality, data engineering and cloud native engineering. I am also an engaged participant in the information security community, attending various capture-the-flags, meet-ups and conferences.',

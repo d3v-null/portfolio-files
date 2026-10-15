@@ -468,6 +468,10 @@ export default {
             {
               text: 'Marlu (shared Rust utilities) on GitHub',
               url: 'https://github.com/MWATelescope/Marlu'
+            },
+            {
+              text: 'Conference paper (AP-RASC 2025)',
+              url: 'https://doi.org/10.46620/ursiaprasc25/lscn1310'
             }
           ]
         },
@@ -592,6 +596,18 @@ export default {
           authors: 'Tingay et al. (35 authors)',
           year: '2026',
           url: 'https://arxiv.org/abs/2606.01644'
+        },
+        {
+          title: 'MWA_HYPERDRIVE: Next generation calibration software for the Murchison Widefield Array radio telescope',
+          authors: 'Jordan, Null, et al. (AP-RASC 2025)',
+          year: '2025',
+          url: 'https://doi.org/10.46620/ursiaprasc25/lscn1310'
+        },
+        {
+          title: '21cm Epoch of Reionisation studies with the Murchison Widefield Array: latest results and planning for SKA-Low using an SKA precursor',
+          authors: 'Trott, Nunhokee, Null, Barry (AP-RASC 2025)',
+          year: '2025',
+          url: 'https://doi.org/10.46620/ursiaprasc25/xfye5150'
         },
         {
           title: 'Improved limits on the 21cm signal at z=6.5-7.0 with the MWA using Gaussian information',

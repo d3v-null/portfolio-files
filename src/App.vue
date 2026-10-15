@@ -44,12 +44,12 @@
             <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#interests"
-              >Interests</a
-            >
+            <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
+            <a class="nav-link js-scroll-trigger" href="#publications"
+              >Publications</a
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link" href="http://blog.laserphile.com/">Blog</a>
@@ -57,7 +57,7 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              href="https://github.com/derwentx/portfolio-files"
+              href="https://github.com/d3v-null/portfolio-files"
               >Source Code</a
             >
           </li>
@@ -180,6 +180,9 @@
           <div class="subheading mb-3">Programming Languages</div>
           <ul class="list-inline list-icons">
             <li class="list-inline-item">
+              <i class="devicons devicons-rust"></i>
+            </li>
+            <li class="list-inline-item">
               <i class="devicon-python-plain"></i>
               <!-- -wordmark -->
             </li>
@@ -260,7 +263,7 @@
           <div class="subheading mb-3">Tools & Workflow</div>
           <ul class="list-inline list-icons">
             <li class="list-inline-item">
-              <i class="devicon-travis-plain"></i>
+              <i class="devicon-linux-plain"></i>
               <!-- -wordmark -->
             </li>
             <li class="list-inline-item">
@@ -268,7 +271,7 @@
               <!-- -wordmark -->
             </li>
             <li class="list-inline-item">
-              <i class="devicon-atom-original"></i>
+              <i class="devicon-docker-plain"></i>
               <!-- -wordmark -->
             </li>
             <li class="list-inline-item">
@@ -276,62 +279,10 @@
               <!-- -wordmark -->
             </li>
             <li class="list-inline-item">
-              <i class="devicons devicons-docker"></i>
-              <!-- -wordmark -->
-            </li>
-            <li class="list-inline-item">
               <i class="devicons devicons-google-cloud-platform"></i>
               <!-- -wordmark -->
             </li>
           </ul>
-        </div>
-      </section>
-
-      <section
-        class="resume-section p-3 p-lg-5 d-flex flex-column"
-        id="interests"
-      >
-        <div class="my-auto">
-          <h2 class="mb-5">Interests</h2>
-          <p>
-            In my spare time I play drums for
-            <a href="https://www.facebook.com/theanxioustype">two</a>
-            <a href="https://www.facebook.com/shaebirdwonders/">bands</a> and
-            make experimental electronic music using algorithmic composition.
-            Writing music in high level languages like Supercollider, Haskell
-            and Clojure/Overtone is a nice way to take a break from work. Most
-            aspects of my life revolve around code in some way.
-          </p>
-          <p>
-            For most of my life, Python has been my native tongue, and I feel
-            very much at home in a command line. I've used Python in countless
-            open source projects ranging from small utilities and web scrapers
-            to automate my workflow; to ambitious collaborative art projects for
-            festivals. My friends and I have worked on several novel electronics
-            engineering projects which we have written about in
-            <a href="http://blog.laserphile.com/">our blog</a>.
-          </p>
-          <div
-            class="resume-item d-flex flex-column flex-md-row mb-5"
-            v-for="interest in interests"
-            :key="interest.title"
-          >
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">{{ interest.title }}</h3>
-              <p v-html="interest.description"></p>
-              <ul>
-                <li v-for="(item, index) in interest.items" :key="index">
-                  <strong v-html="item.strong"></strong>
-                  <span
-                    v-for="(sub_item, sub_index) in item.sub_items"
-                    :key="sub_index"
-                  >
-                    <span> &middot; </span><span v-html="sub_item"></span>
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -348,9 +299,11 @@
           >
             <div class="col-md-5">
               <img
+                v-if="project.image"
                 class="img-fluid rounded mb-3 mb-md-0"
                 :src="require_asset(project.image)"
                 width="320px"
+                style="max-height: 240px; object-fit: contain"
               />
             </div>
             <div class="resume-content mr-auto col-md-7">
@@ -374,6 +327,30 @@
           </div>
         </div>
       </section>
+
+      <section
+        class="resume-section p-3 p-lg-5 d-flex flex-column"
+        id="publications"
+      >
+        <div class="my-auto">
+          <h2 class="mb-5">Publications</h2>
+          <div
+            class="resume-item d-flex flex-column flex-md-row mb-5"
+            v-for="paper in publications"
+            :key="paper.url"
+          >
+            <div class="resume-content mr-auto">
+              <h3 class="mb-0">
+                <a class="text-reset" :href="paper.url">{{ paper.title }}</a>
+              </h3>
+              <div class="subheading mb-3">{{ paper.authors }}</div>
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">{{ paper.year }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
@@ -392,28 +369,43 @@ export default {
         email: 'dev.aleph.null@gmail.com'
       },
       about:
-        'I am a polymath developer with a passion for social justice. I have an innate ability to quickly adapt to unfamiliar tech stacks and a strong drive for solving complex engineering problems on the cutting edge of computer science. I have made a point of exposing myself to as many different software engineering domains as possible. These domains range from quantum computing, machine learning, and internet of things, to augmented reality, data engineering and cloud native engineering. I am also an engaged participant in the information security community, attending various capture-the-flags, meet-ups and conferences.',
+        'I build GPU-accelerated data processing pipelines that run on supercomputers, turning the firehose of data from radio telescopes like the Murchison Widefield Array and the SKA into science. I maintain open source Rust software used to preprocess and calibrate MWA data, I help build the SRCNet execution framework for the SKA Regional Centre Network, and I co-author papers setting upper limits on the 21 cm signal from the Epoch of Reionisation. Before astronomy I worked across web, IoT, augmented reality, machine learning, cloud infrastructure and information security, and I still love jumping into an unfamiliar stack to solve a hard engineering problem.',
       socials: {
-        github: 'derwentx',
-        twitter: 'derwentx',
+        github: 'd3v-null',
+        twitter: '_dev_0',
         facebook: 'derwentx',
         linkedin: 'derwentx'
       },
       experience: [
         {
-          position: 'IT Infrastructure Manager',
-          company: 'Anna Chandler Design',
-          location: "O'Connor, WA",
+          position: 'Senior Developer',
+          company: 'Curtin Institute of Radio Astronomy',
+          location: 'Bentley, WA',
           description: '',
           items: [
-            'Provided IT support and POS system deployment to a fleet of 4 stores',
-            'Designed, Built and Optimized a custom WooCommerce website which has vastly improved the business’ sales.',
-            'Installed and Maintained a network of security camera systems across multiple locations',
-            'Created a utility which automatically synchronizes product stock data between WooCommerce and Xero using their respective APIs',
-            'Built a custom map generator around the Xero accounting API'
+            'Maintain Birli and hyperdrive, the Rust preprocessing and GPU-accelerated (CUDA and HIP) calibration software for the Murchison Widefield Array, along with the hyperbeam, Marlu, mwalib and giant-squid libraries they are built on.',
+            'Help build the execution framework for the SKA Regional Centre Network (SRCNet): a global computing broker and per-site job gateways that run science workflows on Kubernetes and Slurm across the network.',
+            'Package and deploy the radio astronomy software stack on supercomputers with Spack, contributing to Pawsey and SKA SDP package repositories.',
+            'Built Nextflow pipelines that let Epoch of Reionisation researchers run their analysis at an unprecedented scale, and contributed to the MWA EoR power spectrum limits and the SKA Science Data Challenge 3a.'
           ],
-          startDate: 'Jan. 2010',
-          endDate: 'Jun. 2014'
+          startDate: 'Jan. 2021',
+          endDate: 'Present'
+        },
+        {
+          position: 'Developer Consultant',
+          company: 'ThoughtWorks',
+          location: 'Melbourne, VIC',
+          description: '',
+          items: [
+            'Led a team of developers from around the world in building a VueJS web app for connecting victims of the Australian bushfire disaster with a searchable directory of helpful resources',
+            'Helped the Personalization and Optimization team at an airline with the productionisation of their machine learning pipelines',
+            "Set up multiple Azure DevOps pipelines which provisioned a large retail organization's cloud infrastructure using Terraform.",
+            'Built an augmented reality app as a proof of concept for a major sporting organization.',
+            'Helped a renewable energy company enrich the data visualizations in their React frontend and improve the test coverage of their GraphQL queries.',
+            'Oversaw the security of multiple client engagements, facilitating threat modelling sessions and information security training.'
+          ],
+          startDate: 'Jan. 2019',
+          endDate: 'Nov. 2020'
         },
         {
           position: 'Freelance IT Consultant',
@@ -433,20 +425,19 @@ export default {
           endDate: 'Jan. 2019'
         },
         {
-          position: 'Regional Security Specialist',
-          company: 'ThoughtWorks',
-          location: 'Melbourne, VIC',
+          position: 'IT Infrastructure Manager',
+          company: 'Anna Chandler Design',
+          location: "O'Connor, WA",
           description: '',
           items: [
-            'Lead a team of developers from around the world in building a VueJS web app for connecting victims of the Australian bushfire disaster with a searchable directory of helpful resources',
-            'Helped the Personalization and Optimization team at an airline with the productionisation of their machine learning pipelines',
-            "Set up multiple Azure DevOps pipelines which provisioned a large retail organization's cloud infrastructure using Terraform.",
-            'Built an augmented reality app as a proof of concept for a major sporting organization.',
-            'Helped a renewable energy company enrich the data visualizations in their React frontend and improve the test coverage of their GraphQL queries.',
-            'Performed the role of security champion on most of these engagements.'
+            'Provided IT support and POS system deployment to a fleet of 4 stores',
+            'Designed, Built and Optimized a custom WooCommerce website which has vastly improved the business’ sales.',
+            'Installed and Maintained a network of security camera systems across multiple locations',
+            'Created a utility which automatically synchronizes product stock data between WooCommerce and Xero using their respective APIs',
+            'Built a custom map generator around the Xero accounting API'
           ],
-          startDate: 'Jan. 2019',
-          endDate: 'Present'
+          startDate: 'Jan. 2010',
+          endDate: 'Jun. 2014'
         }
       ],
       education: [
@@ -459,6 +450,60 @@ export default {
         }
       ],
       projects: [
+        {
+          title: 'hyperdrive',
+          role: 'Calibration software for the MWA',
+          description:
+            'GPU-accelerated direction-independent calibration and sky-model subtraction for the Murchison Widefield Array, written in Rust with CUDA and HIP backends so it runs on both NVIDIA and AMD supercomputers.',
+          image: 'project-hyperdrive.png',
+          links: [
+            {
+              text: 'hyperdrive on GitHub',
+              url: 'https://github.com/MWATelescope/mwa_hyperdrive'
+            },
+            {
+              text: 'hyperbeam (MWA beam model) on GitHub',
+              url: 'https://github.com/MWATelescope/mwa_hyperbeam'
+            },
+            {
+              text: 'Marlu (shared Rust utilities) on GitHub',
+              url: 'https://github.com/MWATelescope/Marlu'
+            }
+          ]
+        },
+        {
+          title: 'Birli',
+          role: 'Lead developer',
+          description:
+            'A Rust preprocessor for raw MWA correlator data: RFI flagging with AOFlagger, cable, geometric and Van Vleck corrections, averaging, and output to uvfits and Measurement Sets.',
+          image: 'project-birli.png',
+          links: [
+            {
+              text: 'Birli on GitHub',
+              url: 'https://github.com/MWATelescope/Birli'
+            }
+          ]
+        },
+        {
+          title: 'SRCNet Execution Framework',
+          role: 'Computing broker and site job gateways',
+          description:
+            'The execution framework for the SKA Regional Centre Network: a global computing broker accepts science workflows and dispatches them to job gateways at each regional centre, which run them on Kubernetes or Slurm next to the data.',
+          links: [
+            {
+              text: 'Computing broker on GitLab',
+              url: 'https://gitlab.com/ska-telescope/src/src-ef/ska-src-ef-computing-broker'
+            },
+            {
+              text: 'Local job gateway on GitLab',
+              url: 'https://gitlab.com/ska-telescope/src/src-ef/ska-src-ef-local-job-gateway'
+            },
+            {
+              text: 'SRC scientific workloads on GitLab',
+              url: 'https://gitlab.com/ska-telescope/src/src-workloads'
+            }
+          ]
+        },
         {
           title: 'TeleCortex',
           role: 'Protocol, firmware and controller software',
@@ -482,33 +527,17 @@ export default {
               text: 'NodeJS Rewrite of Server on GitHub',
               url: 'https://github.com/Laserphile/JS-Telecortex-2-Server'
             }
-          ],
-          badges: [
-            {
-              html:
-                '<a href="https://codeclimate.com/github/Laserphile/JS-Telecortex-2-Server/maintainability"><img src="https://api.codeclimate.com/v1/badges/ef74b26938c3f747b39f/maintainability" /></a>'
-            },
-            {
-              html:
-                '<a href="https://codecov.io/gh/Laserphile/JS-Telecortex-2-Server"><img src="https://codecov.io/gh/Laserphile/JS-Telecortex-2-Server/branch/master/graph/badge.svg" /></a>'
-            }
           ]
         },
         {
           title: 'PixelBlaze Expander NodeJS Library',
           description:
-            'A NodeJS Library for controlling <a href="https://github.com/simap/pixelblaze_output_expander">PixelBlaze Expander> boards via serial port.',
+            'A NodeJS Library for controlling <a href="https://github.com/simap/pixelblaze_output_expander">PixelBlaze Expander</a> boards via serial port.',
           image: 'pbx_board.jpeg',
           links: [
             {
               text: 'NodeJS library on GitHub',
-              url: 'https://github.com/derwentx/js-pixelblaze-expander'
-            }
-          ],
-          badges: [
-            {
-              html:
-                '<a href="https://codeclimate.com/github/derwentx/js-pixelblaze-expander/maintainability"><img src="https://api.codeclimate.com/v1/badges/b16f8ee13c50462afb9a/maintainability" /></a>'
+              url: 'https://github.com/d3v-null/js-pixelblaze-expander'
             }
           ]
         },
@@ -532,7 +561,7 @@ export default {
           links: [
             {
               text: 'Project on GitHub',
-              url: 'https://github.com/derwentx/Moonbuggy-Controller'
+              url: 'https://github.com/d3v-null/Moonbuggy-Controller'
             }
           ]
         },
@@ -548,83 +577,45 @@ export default {
             },
             {
               text: 'Firmware on GitHub',
-              url: 'https://github.com/derwentx/Marlin-Laserphile'
+              url: 'https://github.com/d3v-null/Marlin-Laserphile'
             },
             {
               text: 'Open SCAD files on GitHub',
-              url: 'https://github.com/derwentx/hydra-bits'
-            }
-          ]
-        },
-        {
-          title: 'GPM Cache',
-          description:
-            'Wrote a script to locally cache files from a playlist in Google Play Music for you to enjoy offline',
-          image: 'project-gpm-cache.png',
-          links: [
-            {
-              text: 'Project on GitHub',
-              url: 'https://github.com/derwentx/gpm-cache'
-            }
-          ],
-          badges: [
-            {
-              html:
-                '<a href="https://codeclimate.com/github/derwentx/gpm-cache/maintainability"><img src="https://api.codeclimate.com/v1/badges/f28cbc664d9193b330b3/maintainability" /></a>'
+              url: 'https://github.com/d3v-null/hydra-bits'
             }
           ]
         }
       ],
-      interests: [
+      publications: [
         {
-          title: 'Conferences / Workshops',
-          description:
-            "During my time as a freelancer, I've attended numerous conferences (at my own expense) because I love being at the forefront of research in the computer science and information security community. I watch the talks that come out of CCC, Black Hat and DEF CON religiously. Here are some of the recent conferences and workshops I've been a part of:",
-          items: [
-            { strong: 'OWASP AppSec Day', sub_items: ['Melbourne, 2018'] },
-            {
-              strong: 'Platypus',
-              sub_items: [
-                'Ran a <a href="http://blog.laserphile.com/2017/10/platypus-hardware-hacking-101-finding.html">workshop on bypassing IoT security using UART</a>, 2017'
-              ]
-            },
-            { strong: 'Ruxcon', sub_items: ['Melbourne, 2017'] },
-            { strong: 'WAHCKon', sub_items: ['Perth, 2015 - 2016'] },
-            { strong: 'PyCon', sub_items: ['Melbourne, 2017'] },
-            { strong: 'Compose', sub_items: ['Melbourne, 2017 - 2018'] },
-            { strong: 'PlatypusCamp', sub_items: ['Sydney, 2017'] },
-            { strong: 'BuzzConf', sub_items: ['Melbourne, 2016 - 2017'] },
-            { strong: 'WooConf', sub_items: ['San Francisco, 2014'] }
-          ]
+          title: 'The Murchison Widefield Array Phase III upgrade: Sensitivity Doubled, Number of Baselines Quadrupled, Flexibility Enhanced, and EoR Observations Optimised',
+          authors: 'Tingay et al. (35 authors)',
+          year: '2026',
+          url: 'https://arxiv.org/abs/2606.01644'
         },
         {
-          title: 'Wargames / CTFs / Hackathons',
-          description:
-            "I started hacking with Kali Linux (or Backtrack as it was called then) in my teenage years on discarded computer hardware that I would find and repair. More recently I've been pursuing my passion in Infosec by competing in various capture the flag competitions, hackathons and wargame exercises.",
-          items: [
-            {
-              strong: 'PentesterLab Pro',
-              sub_items: [
-                'Blue',
-                'PCAP',
-                'Yellow',
-                'Intercept',
-                'Serialize',
-                'White',
-                'Essential',
-                'Unix'
-              ]
-            },
-            { strong: 'RuxCon CTF', sub_items: ['2017'] },
-            { strong: 'PlatypusCamp CTF', sub_items: ['Android Internals'] },
-            { strong: 'PyCon Hackathon', sub_items: ['ESP32 Toolchain'] },
-            { strong: 'ExploitExercises', sub_items: ['Nebula', 'Protostar'] },
-            { strong: 'VulnHub', sub_items: ['Mr Robot'] },
-            {
-              strong: 'OverTheWire',
-              sub_items: ['Bandit', 'Leviathan', 'Natas', 'Krypton']
-            }
-          ]
+          title: 'Improved limits on the 21cm signal at z=6.5-7.0 with the MWA using Gaussian information',
+          authors: 'Trott, Nunhokee, Null, et al.',
+          year: '2025',
+          url: 'https://arxiv.org/abs/2508.04164'
+        },
+        {
+          title: 'Limits on the 21 cm power spectrum at z=6.5-7.0 from MWA observations',
+          authors: 'Nunhokee, Null, et al.',
+          year: '2025',
+          url: 'https://arxiv.org/abs/2505.09097'
+        },
+        {
+          title: 'Square Kilometre Array Science Data Challenge 3a: foreground removal for an EoR experiment',
+          authors: 'Bonaldi et al. (184 authors)',
+          year: '2025',
+          url: 'https://arxiv.org/abs/2503.11740'
+        },
+        {
+          title: 'Verifying the Australian MWA EoR pipeline II: fundamental limits of the AusEoRPipe and the impact of instrumental effects',
+          authors: 'Line, Trott, Barry, Null, Jordan',
+          year: '2025',
+          url: 'https://arxiv.org/abs/2501.07004'
         }
       ],
       profile_file: 'profile.jpg'

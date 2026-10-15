@@ -384,8 +384,8 @@ export default {
     return {
       title: 'My Portfolio',
       name: {
-        first: 'Derwent'
-        // , last: 'McElhinney'
+        first: 'Dev',
+        last: 'Null'
       },
       contact: {
         phone: '(+61) 416-160-912',

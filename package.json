@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
-  "description": "Derwent's portfolio site",
+  "description": "Dev Null's portfolio site",
   "author": "derwentx <derwentx@gmail.com>",
   "private": true,
   "scripts": {
